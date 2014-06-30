@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["alchapone@yandex.ru"]
   spec.summary       = %q{Use of web components with polymer with rails}
   spec.description   = %q{Use of web components and polymer-project in Ruby on Rails projects}
-  spec.homepage      = "http://github.com"
+  spec.homepage      = "http://github.com/alchapone/polymer-rails"
   spec.license       = "MIT"
 
   spec.files         = 'lib/polymer-rails.rb'
