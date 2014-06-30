@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = "http://github.com/alchapone/polymer-rails"
   spec.license       = "MIT"
 
-  spec.files         = 'lib/polymer-rails.rb'
+  spec.files = Dir["{app,config,db,lib}/**/*", "Rakefile", "README.md"]
 
   spec.add_runtime_dependency "rails",       ">= 3.1.0"
 
