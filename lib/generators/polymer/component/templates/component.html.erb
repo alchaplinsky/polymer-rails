@@ -1,0 +1,19 @@
+<%%= html_import_tag 'polymer/polymer.html' %>
+
+<polymer-element name="<%= name %>">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <h2><%= file_name.capitalize.gsub('_', ' ') %></h2>
+  </template>
+
+  <script type="text/javascript">
+    Polymer('<%= name %>', {
+      ready: function() { this.globals = this.$.globals; }
+    });
+  </script>
+</polymer-element>

@@ -22,8 +22,12 @@ Or install it yourself as:
 
     $ rails g polymer:install
 
-Generator adds `//= require polymer/platform` into `application` manifest file, and creates
+This generator adds `//= require polymer/platform` into `application` manifest file, and creates
 `app/assets/components` and `vendor/assets/components` directories for your and third-party web components.
+
+    $ rails g polymer:component <component-name>
+
+This generates new `<component-name>` component directory and .html file of the same name under `app/assets/components` directory.
 
 ## Contributing
 
