@@ -1,5 +1,5 @@
-module ActionView
-  module Helpers
+module Polymer
+  module Rails
     module AssetTagHelper
       def html_import_tag(*sources)
         options = sources.extract_options!
