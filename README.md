@@ -29,6 +29,12 @@ This generator adds `//= require polymer/platform` into `application` manifest f
 
 This generates new `<component-name>` component directory and .html file of the same name under `app/assets/components` directory.
 
+Under `app/assets/components` directory you can now build your web components.
+
+See example Rails application here [http://polymer-rails-example.herokuapp.com/](http://polymer-rails-example.herokuapp.com/)
+
+Source code can be found here [https://github.com/alchapone/polymer-rails-example](https://github.com/alchapone/polymer-rails-example)
+
 ## Contributing
 
 1. Fork it ( http://github.com/alchapone/polymer-rails/fork )
