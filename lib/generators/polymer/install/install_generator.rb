@@ -6,7 +6,15 @@ module Polymer
 
       def create_app_dir
         empty_directory "app/assets/components"
-        create_file "vendor/assets/components/.keep"
+      end
+
+      def create_manifest
+        create_file "app/assets/components/application.html.erb"
+        append_to_file "app/assets/components/application.html.erb" do
+          out = ""
+          out << "//= require polymer/polymer"
+          out << "\n"
+        end
       end
 
       def create_vendor_dir

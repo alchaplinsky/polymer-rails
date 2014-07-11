@@ -1,5 +1,3 @@
-<%%= html_import_tag 'polymer/polymer.html' %>
-
 <polymer-element name="<%= name %>">
   <template>
     <style>
@@ -12,8 +10,6 @@
   </template>
 
   <script type="text/javascript">
-    Polymer('<%= name %>', {
-      ready: function() { this.globals = this.$.globals; }
-    });
+    Polymer('<%= name %>');
   </script>
 </polymer-element>
