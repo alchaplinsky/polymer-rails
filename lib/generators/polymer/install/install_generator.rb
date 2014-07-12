@@ -1,25 +1,12 @@
 module Polymer
   module Generators
     class InstallGenerator < ::Rails::Generators::Base
+      source_root File.expand_path('../templates', __FILE__)
 
       desc "Adds app/assets/components and vendor/assets/components directories and adds platform to js manifest"
 
-      def create_app_dir
-        empty_directory "app/assets/components"
-      end
-
       def create_manifest
-        create_file "app/assets/components/application.html.erb"
-        append_to_file "app/assets/components/application.html.erb" do
-          out = ""
-          out << "//= require polymer/polymer"
-          out << "\n"
-        end
-      end
-
-      def create_vendor_dir
-        empty_directory "vendor/assets/components"
-        create_file "vendor/assets/components/.keep"
+        template "application.html.erb", "app/assets/components/application.html.erb"
       end
 
       def inject_js
@@ -28,6 +15,10 @@ module Polymer
           out << "//= require polymer/platform"
           out << "\n"
         end
+      end
+
+      def create_vendor_dir
+        create_file "vendor/assets/components/.keep"
       end
 
     end
