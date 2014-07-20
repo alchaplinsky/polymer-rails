@@ -43,7 +43,9 @@ Add your component to manifest file after requiring polymer:
     //= require polymer/polymer
     //= require component-name/component-name
 
-And you can use your component in your application!
+And you can use your component in Rails application!
+
+## Example
 
 See example Rails application here [http://polymer-rails-example.herokuapp.com/](http://polymer-rails-example.herokuapp.com/)
 
