@@ -9,7 +9,15 @@ module Polymer
         @doc = Nokogiri::HTML::Document.parse(data)
         inline_styles
         inline_javascripts
+        require_imports
         @doc.inner_html
+      end
+
+      def require_imports
+        @doc.css("link[rel='import']").each do |import|
+          @context.require_asset component_path(import.attributes['href'].value)
+          import.remove
+        end
       end
 
       def inline_javascripts
@@ -32,6 +40,13 @@ module Polymer
         dir  = File.dirname(@context.pathname)
         path = File.absolute_path(file, dir)
         @context.evaluate path
+      end
+
+      def component_path(file)
+        dir = File.dirname(@context.pathname)
+        path = File.absolute_path(file, dir)
+        dir.gsub!('/app/assets/', '/vendor/assets/') unless File.exist?(File.absolute_path(file, dir))
+        File.absolute_path(file, dir)
       end
 
     end
