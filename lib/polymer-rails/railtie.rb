@@ -12,6 +12,7 @@ module Polymer
       initializer :add_preprocessors do |app|
         app.assets.register_mime_type "text/html", ".html"
         app.assets.register_preprocessor "text/html", Polymer::Rails::DirectiveProcessor
+        app.assets.register_postprocessor 'text/html', Polymer::Rails::AssetsProcessor
       end
 
     end
