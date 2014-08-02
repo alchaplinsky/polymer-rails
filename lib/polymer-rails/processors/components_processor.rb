@@ -1,38 +1,40 @@
 require 'nokogiri'
+require 'polymer-rails/component'
 
 module Polymer
   module Rails
-    class AssetsProcessor < Sprockets::Processor
+    class ComponentsProcessor < Sprockets::Processor
 
-      def evaluate(context, locals)
+      def initialize(context, data)
         @context = context
-        @doc = Nokogiri::HTML::Document.parse(data)
+        @component = Component.new(data)
+      end
+
+      def process
         inline_styles
         inline_javascripts
         require_imports
-        @doc.inner_html
+        @component.stringify
       end
 
+    private
+
       def require_imports
-        @doc.css("link[rel='import']").each do |import|
+        @component.imports.each do |import|
           @context.require_asset component_path(import.attributes['href'].value)
           import.remove
         end
       end
 
       def inline_javascripts
-        @doc.css("script[src]").each do |src|
-          script = Nokogiri::XML::Node.new('script', @doc)
-          script.content = asset_content(src.attributes['src'].value)
-          src.replace script
+        @component.javascripts.each do |script|
+          @component.replace_node(script, 'script', asset_content(script.attributes['src'].value))
         end
       end
 
       def inline_styles
-        @doc.css("link[rel='stylesheet']").each do |link|
-          style = Nokogiri::XML::Node.new('style', @doc)
-          style.content = asset_content(link.attributes['href'].value)
-          link.replace style
+        @component.stylesheets.each do |link|
+          @component.replace_node(link, 'style', asset_content(link.attributes['href'].value))
         end
       end
 
@@ -44,7 +46,6 @@ module Polymer
 
       def component_path(file)
         dir = File.dirname(@context.pathname)
-        path = File.absolute_path(file, dir)
         dir.gsub!('/app/assets/', '/vendor/assets/') unless File.exist?(File.absolute_path(file, dir))
         File.absolute_path(file, dir)
       end
