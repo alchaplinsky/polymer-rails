@@ -17,6 +17,10 @@ module Polymer
         end
       end
 
+      def copy_bowerrc
+          template "bowerrc.json", ".bowerrc"
+      end
+
       def create_vendor_dir
         create_file "vendor/assets/components/.keep"
       end
