@@ -1,8 +1,20 @@
-# Polymer::Rails
+# Polymer-Rails
+Want to get started with  [web components](http://www.w3.org/TR/components-intro/)? Want to bring them into your Rails app? Easily build your own and use web components that are built by community in your Ruby on Rails Application. Poymer-rails helps you to do this:
 
-Adds [polymer](http://polymer-project.org/) to your rails project to help in building [web components](http://www.w3.org/TR/components-intro/).
+1. Adds [polymer](http://polymer-project.org/) library to assets of your rails project.
 
-Easily import web component with `<%= html_import_tag "my-component" %>`.
+2. Allows you to easily import web component with `<%= html_import_tag "my-component" %>` helper.
+
+3. Allows you to import and package web components into assets pipeline, exactly as you would Javascript or CSS
+
+#### Prefer using SASS or CoffeeSript?
+
+Polymer-rails works well with compiling assets, such as CoffeeScript and Sass.
+You can easily use external stylesheet or script tag references in your web component with any extension that Sprockets recognize.
+Use `<link rel="stylesheet" href="application.sass">` for stylesheets and `<script src="application.coffee">` for javascripts.
+This assets will be automatically compiled and required into component html file.
+
+
 
 ## Installation
 
@@ -45,6 +57,12 @@ Add your component to manifest file after requiring polymer:
 
 And you can use your component in Rails application!
 
+#### Polymer core/paper elements
+
+Polymer team is working on set of core element which you can learn more about here http://www.polymer-project.org/docs/elements/core-elements.html. If you want to use them in your Rails application, checkout [polymer-core-rails](https://github.com/alchapone/polymer-core-rails) gem.
+
+You may also be interested in Polymer paper elements, they are also available as [polymer-paper-rails](https://github.com/alchapone/polymer-paper-rails) gem.
+
 ## Example
 
 See example Rails application here [http://polymer-rails-example.herokuapp.com/](http://polymer-rails-example.herokuapp.com/)
@@ -53,9 +71,7 @@ Source code can be found here [https://github.com/alchapone/polymer-rails-exampl
 
 ## Learn more
 
- Polymer team is working on set of core element which you can learn more about here http://www.polymer-project.org/docs/elements/core-elements.html
-
- Also you can check out http://customelements.io/ or http://component.kitchen/ to see what components are already built by community.
+ You can check out http://customelements.io/ or http://component.kitchen/ to see what components are already built by community.
 
 ## Contributing
 
