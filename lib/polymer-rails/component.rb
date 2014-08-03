@@ -3,11 +3,11 @@ module Polymer
     class Component
 
       def initialize(data)
-        @doc = Nokogiri::HTML.fragment(data)
+        @doc = ::Nokogiri::HTML.fragment(data)
       end
 
       def create_node(name, content)
-        node = Nokogiri::XML::Node.new(name, @doc)
+        node = ::Nokogiri::XML::Node.new(name, @doc)
         node.content = content
         node
       end
