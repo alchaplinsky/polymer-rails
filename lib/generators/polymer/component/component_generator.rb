@@ -8,7 +8,7 @@ module Polymer
       end
 
       def copy_component_template
-        template "component.html.erb", "app/assets/components/#{file_name}/#{file_name}.html.erb"
+        template "component.html.erb", "app/assets/components/#{file_name}/#{file_name}.html"
       end
 
     end
