@@ -1,3 +1,4 @@
+require "sprockets"
 require "polymer-rails/version"
 require "polymer-rails/processors/directive_processor"
 require "polymer-rails/processors/components_processor"
