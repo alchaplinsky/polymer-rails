@@ -3,7 +3,7 @@ module Polymer
     class Railtie < ::Rails::Railtie
       initializer :polymer_html_import do
         helpers = %q{ include AssetTagHelper }
-        ::ActionView::Helpers::AssetTagHelper.module_eval(helpers)
+        ::ActionView::Base.module_eval(helpers)
         ::Rails.application.assets.context_class.class_eval(helpers)
       end
 
