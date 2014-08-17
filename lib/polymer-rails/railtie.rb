@@ -3,11 +3,13 @@ module Polymer
     class Railtie < ::Rails::Railtie
       initializer :polymer_html_import do
         helpers = %q{ include AssetTagHelper }
-        ::ActionView::Helpers::AssetTagHelper.module_eval(helpers)
+        ::ActionView::Base.module_eval(helpers)
         ::Rails.application.assets.context_class.class_eval(helpers)
       end
 
-      config.assets.precompile += %w( polymer/polymer.js )
+      initializer :precompile_polymer do |app|
+        app.config.assets.precompile += %w( polymer/polymer.js )
+      end
 
       initializer :add_preprocessors do |app|
         app.assets.register_mime_type "text/html", ".html"
