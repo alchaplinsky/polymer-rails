@@ -21,33 +21,60 @@ module Polymer
 
       def require_imports
         @component.imports.each do |import|
-          @context.require_asset component_path(import.attributes['href'].value)
-          import.remove
+          file = component_path(import.attributes['href'].value)
+          unless file.nil?
+            @context.require_asset file
+            import.remove
+          end
         end
       end
 
       def inline_javascripts
         @component.javascripts.each do |script|
-          @component.replace_node(script, 'script', asset_content(script.attributes['src'].value))
+          file = asset_content(script.attributes['src'].value)
+          @component.replace_node(script, 'script', file) unless file.nil?
         end
       end
 
       def inline_styles
         @component.stylesheets.each do |link|
-          @component.replace_node(link, 'style', asset_content(link.attributes['href'].value))
+          file = asset_content(link.attributes['href'].value)
+          @component.replace_node(link, 'style', file) unless file.nil?
         end
       end
 
       def asset_content(file)
         dir  = File.dirname(@context.pathname)
         path = File.absolute_path(file, dir)
-        @context.evaluate path
+        if File.exists? path
+          @context.evaluate path
+        else
+          nil
+        end
       end
 
       def component_path(file)
         dir = File.dirname(@context.pathname)
         dir.gsub!('/app/assets/', '/vendor/assets/') unless File.exist?(File.absolute_path(file, dir))
-        File.absolute_path(file, dir)
+
+        assets = ::Rails.application.assets.paths
+
+        return File.absolute_path file, @context.pathname if File.exists? File.absolute_path file, @context.pathname
+
+        search_file = file.sub(/^(\.\.\/)+/, '/').sub(/^\/*/, '')
+        assets.each do |path|
+          find =
+          file_list = Dir.glob( "#{File.absolute_path search_file, path }*")
+          if file_list.length == 1
+            return file_list[0]
+          end
+        end
+
+        if File.exists? File.absolute_path(file, dir)
+          File.absolute_path(file, dir)
+        else
+          nil
+        end
       end
 
     end
