@@ -1,5 +1,5 @@
 # Polymer-Rails
-Want to get started with  [web components](http://www.w3.org/TR/components-intro/)? Want to bring them into your Rails app? Easily build your own and use web components that are built by community in your Ruby on Rails Application. Poymer-rails helps you to do this:
+Want to get started with  [web components](http://www.w3.org/wiki/WebComponents/)? Want to bring them into your Rails app? Easily build your own and use web components that are built by community in your Ruby on Rails Application. Poymer-rails helps you to do this:
 
 1. Adds [polymer](http://polymer-project.org/) library to assets of your rails project.
 
