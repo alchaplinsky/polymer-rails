@@ -8,8 +8,7 @@ module Polymer
 
       def replace_node(node, name, content)
         # add the attributes that are not standard such as shim-shadowdom
-        node.swap "<#{name}></#{name}>"
-        node.inner_html content
+        node.swap "<#{name}>\n#{content}\n</#{name}>"
         node
       end
 
