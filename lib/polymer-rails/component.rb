@@ -3,29 +3,29 @@ module Polymer
     class Component
 
       def initialize(data)
-        @doc = ::Nokogiri::HTML.fragment(data)
-      end
-
-      def create_node(name, content)
-        node = ::Nokogiri::XML::Node.new(name, @doc)
-        node.content = content
-        node
+        @doc = Hpricot(data)
       end
 
       def replace_node(node, name, content)
-        node.replace create_node(name, content)
+        # add the attributes that are not standard such as shim-shadowdom
+        node.swap "<#{name}></#{name}>"
+        node.inner_html content
+        node
       end
 
       def stylesheets
-        @doc.css("link[rel='stylesheet']")
+        links = @doc.search("link")
+        links.select do |link| link.attributes["rel"].downcase == "stylesheet" end
       end
 
       def javascripts
-        @doc.css("script[src]")
+        scripts = @doc.search("script")
+        scripts.select do |script| script.attributes["src"].empty? == false end
       end
 
       def imports
-        @doc.css("link[rel='import']")
+        links = @doc.search("link")
+        links.select do |link| link.attributes["rel"].downcase == "import" end
       end
 
       def stringify

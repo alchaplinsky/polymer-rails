@@ -1,4 +1,4 @@
-require 'nokogiri'
+require 'hpricot'
 require 'polymer-rails/component'
 
 module Polymer
@@ -20,25 +20,26 @@ module Polymer
     private
 
       def require_imports
+        
         @component.imports.each do |import|
-          file = component_path(import.attributes['href'].value)
+          file = component_path(import.attributes['href'])
           unless file.nil?
             @context.require_asset file
-            import.remove
+            import.parent.children.delete(import) unless import.nil?
           end
         end
       end
 
       def inline_javascripts
         @component.javascripts.each do |script|
-          file = asset_content(script.attributes['src'].value)
+          file = asset_content(script.attributes['src'])
           @component.replace_node(script, 'script', file) unless file.nil?
         end
       end
 
       def inline_styles
         @component.stylesheets.each do |link|
-          file = asset_content(link.attributes['href'].value)
+          file = asset_content(link.attributes['href'])
           @component.replace_node(link, 'style', file) unless file.nil?
         end
       end
@@ -63,7 +64,6 @@ module Polymer
 
         search_file = file.sub(/^(\.\.\/)+/, '/').sub(/^\/*/, '')
         assets.each do |path|
-          find =
           file_list = Dir.glob( "#{File.absolute_path search_file, path }*")
           if file_list.length == 1
             return file_list[0]
