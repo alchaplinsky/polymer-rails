@@ -1,9 +1,13 @@
+require 'nokogumbo'
+
 module Polymer
   module Rails
     class Component
 
+      XML_NODES = ['*[selected]', '*[src]:not(script)']
+
       def initialize(data)
-        @doc = ::Nokogiri::HTML.fragment(data)
+        @doc = ::Nokogiri::HTML5("<body>#{data}</body>")
       end
 
       def create_node(name, content)
@@ -28,8 +32,18 @@ module Polymer
         @doc.css("link[rel='import']")
       end
 
+      def to_html
+        @doc.css("body").inner_html
+      end
+
+      def xml_nodes
+        @doc.css(XML_NODES.join(','))
+      end
+
       def stringify
-        @doc.inner_html
+        xml_nodes.reduce(to_html) do |output, node|
+          output.gsub(node.to_html, node.to_xml)
+        end
       end
 
     private
