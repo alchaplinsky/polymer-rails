@@ -45,9 +45,13 @@ module Polymer
       end
 
       def component_path(file)
-        dir = File.dirname(@context.pathname)
-        dir.gsub!('/app/assets/', '/vendor/assets/') unless File.exist?(File.absolute_path(file, dir))
-        File.absolute_path(file, dir)
+        search_file = file.sub(/^(\.\.\/)+/, '/').sub(/^\/*/, '')
+        ::Rails.application.assets.paths.each do |path|
+          file_list = Dir.glob( "#{File.absolute_path search_file, path }*")
+          return file_list.first unless file_list.blank?
+        end
+        component = File.absolute_path file, File.dirname(@context.pathname)
+        return File.exists?(component) ? component : nil
       end
 
     end
