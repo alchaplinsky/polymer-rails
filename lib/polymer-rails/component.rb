@@ -17,11 +17,11 @@ module Polymer
       end
 
       def stylesheets
-        @doc.css("link[rel='stylesheet']")
+        @doc.css("link[rel='stylesheet']").reject{|tag| is_external? tag.attributes['href'].value}
       end
 
       def javascripts
-        @doc.css("script[src]")
+        @doc.css("script[src]").reject{|tag| is_external? tag.attributes['src'].value}
       end
 
       def imports
@@ -32,6 +32,11 @@ module Polymer
         @doc.inner_html
       end
 
+    private
+
+      def is_external?(source)
+        !URI(source).host.nil?
+      end
     end
   end
 end
