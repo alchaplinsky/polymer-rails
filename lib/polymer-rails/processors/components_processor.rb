@@ -40,15 +40,17 @@ module Polymer
       def asset_content(file)
         asset = raw_asset file
         unless asset.nil?
+          @context.depend_on_asset relative_asset_path(file)
           asset.to_s
         else
           nil
         end
       end
       
-      def raw_asset file
+      def relative_asset_path file
         raw_path = component_path(file)
-        return nil if raw_path.nil?
+        return "" if raw_path.nil?
+        
         asset_path = ""
         ::Rails.application.assets.paths.each do |path|
           if raw_path.include? path
@@ -56,6 +58,11 @@ module Polymer
             asset_path = raw_path.sub(r, '')
           end
         end
+        asset_path
+      end
+      
+      def raw_asset file
+        asset_path = relative_asset_path file
         ::Rails.application.assets.find_asset(asset_path.sub(/^\/*/, ''))
       end
       
