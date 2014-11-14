@@ -49,10 +49,10 @@ to import web components manifest to your app.
 
 This generates new `<component-name>` component directory and .html file of the same name under `app/assets/components` folder.
 
-Add your component to manifest file after requiring polymer:
+Add your component to manifest file after requiring webcomponents:
 
     //
-    //= require polymer/polymer
+    //= require polymer/webcomponents
     //= require component-name/component-name
 
 And you can use your component in Rails application!
