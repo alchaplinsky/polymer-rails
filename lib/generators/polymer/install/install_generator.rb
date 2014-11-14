@@ -3,7 +3,7 @@ module Polymer
     class InstallGenerator < ::Rails::Generators::Base
       source_root File.expand_path('../templates', __FILE__)
 
-      desc "Adds app/assets/components and vendor/assets/components directories and adds platform to js manifest"
+      desc "Adds app/assets/components and vendor/assets/components directories and adds webcomponents to js manifest"
 
       def create_manifest
         template "application.html.erb", "app/assets/components/application.html.erb"
@@ -12,7 +12,7 @@ module Polymer
       def inject_js
         insert_into_file "app/assets/javascripts/application.js", before: "//= require jquery\n" do
           out = ""
-          out << "//= require polymer/platform"
+          out << "//= require polymer/webcomponents"
           out << "\n"
         end
       end
