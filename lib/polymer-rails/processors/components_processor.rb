@@ -20,20 +20,30 @@ module Polymer
 
       def require_imports
         @component.imports.each do |import|
-          @context.require_asset component_path(import.attributes['href'].value)
+          path = component_path(import.attributes['href'].value)
+          next unless path
+          @context.require_asset path
           import.remove
         end
       end
 
       def inline_javascripts
         @component.javascripts.each do |script|
-          @component.replace_node(script, 'script', asset_content(script.attributes['src'].value))
+          begin
+            @component.replace_node(script, 'script', asset_content(script.attributes['src'].value))
+          rescue Sprockets::FileNotFound => e
+            puts e.message
+          end
         end
       end
 
       def inline_styles
         @component.stylesheets.each do |link|
-          @component.replace_node(link, 'style', asset_content(link.attributes['href'].value))
+          begin
+            @component.replace_node(link, 'style', asset_content(link.attributes['href'].value))
+          rescue Sprockets::FileNotFound => e
+            puts e.message
+          end
         end
       end
       
