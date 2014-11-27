@@ -36,21 +36,44 @@ module Polymer
           @component.replace_node(link, 'style', asset_content(link.attributes['href'].value))
         end
       end
-
+      
       def asset_content(file)
-        dir  = File.dirname(@context.pathname)
-        path = File.absolute_path(file, dir)
-        @context.evaluate path
+        asset = raw_asset file
+        unless asset.nil?
+          @context.depend_on_asset relative_asset_path(file)
+          asset.to_s
+        else
+          nil
+        end
       end
-
+      
+      def relative_asset_path file
+        raw_path = component_path(file)
+        return "" if raw_path.nil?
+        
+        asset_path = ""
+        ::Rails.application.assets.paths.each do |path|
+          if raw_path.include? path
+            r = Regexp.new "^#{path}/*"
+            asset_path = raw_path.sub(r, '')
+          end
+        end
+        asset_path
+      end
+      
+      def raw_asset file
+        asset_path = relative_asset_path file
+        ::Rails.application.assets.find_asset(asset_path.sub(/^\/*/, ''))
+      end
+      
       def component_path(file)
         search_file = file.sub(/^(\.\.\/)+/, '/').sub(/^\/*/, '')
         ::Rails.application.assets.paths.each do |path|
           file_list = Dir.glob( "#{File.absolute_path search_file, path }*")
           return file_list.first unless file_list.blank?
         end
-        component = File.absolute_path file, File.dirname(@context.pathname)
-        return File.exists?(component) ? component : nil
+        components = Dir.glob("#{File.absolute_path file, File.dirname(@context.pathname)}*")
+        return components.blank? ? nil : components.first
       end
 
     end
