@@ -10,9 +10,9 @@ Want to get started with  [web components](http://www.w3.org/wiki/WebComponents/
 #### Prefer using SASS or CoffeeSript?
 
 Polymer-rails works well with compiling assets, such as CoffeeScript and Sass.
-You can easily use external stylesheet or script tag references in your web component with any extension that Sprockets recognize.
-Use `<link rel="stylesheet" href="application.sass">` for stylesheets and `<script src="application.coffee">` for javascripts.
+You can easily use external stylesheet or script tag references in your web component `<link rel="stylesheet" href="application.css">` for stylesheets and `<script src="application.js">` for javascripts.
 This assets will be automatically compiled and required into component html file.
+* Note that if you're using sass or coffe precompilation, assets are required to use '.css.sass' and '.js.coffee' extensions.*
 
 
 
@@ -36,7 +36,7 @@ Or install it yourself as:
 
     $ rails g polymer:install
 
-- This generator adds `//= require polymer/platform` into `application.js` manifest file  
+- This generator adds `//= require polymer/webcomponents` into `application.js` manifest file  
 - Creates `app/assets/components` and `application.html` manifest file where you can include all your components.
 - Creates `vendor/assets/components` directory for third-party web components.
 
@@ -47,7 +47,7 @@ to import web components manifest to your app.
 
     $ rails g polymer:component <component-name>
 
-This generates new `<component-name>` component directory and .html file of the same name under `app/assets/components` folder.
+This generates new `<component-name>` component directory and `.html`, `.css`, `.js` files of the same name under `app/assets/components` folder.
 
 Add your component to manifest file after requiring webcomponents:
 

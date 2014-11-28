@@ -9,8 +9,8 @@ module Polymer
 
       def copy_component_template
         template "component.html.erb", "app/assets/components/#{component_name}/#{component_name}.html"
-        template "component.js.coffee.erb", "app/assets/components/#{component_name}/#{component_name}.js.coffee"
-        template "component.css.scss.erb", "app/assets/components/#{component_name}/#{component_name}.css.scss"
+        template "component.js.erb", "app/assets/components/#{component_name}/#{component_name}.js"
+        template "component.css.erb", "app/assets/components/#{component_name}/#{component_name}.css"
       end
 
       private
