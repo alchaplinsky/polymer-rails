@@ -4,7 +4,7 @@ module Polymer
   module Rails
     class Component
 
-      XML_NODES = ['*[selected]', '*[src]:not(script)']
+      XML_NODES = ['*[selected]', '*[checked]', '*[src]:not(script)']
 
       def initialize(data)
         @doc = ::Nokogiri::HTML5("<body>#{data}</body>")
