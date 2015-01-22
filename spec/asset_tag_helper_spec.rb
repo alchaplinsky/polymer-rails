@@ -15,7 +15,7 @@ describe Polymer::Rails::AssetTagHelper do
   end
 
   it 'generates html import tag' do
-    expect(@dummy_class.html_import_tag('application')).to eq("<link href=\"/application.html\" rel=\"import\" />")
+    expect(@dummy_class.html_import_tag('application')).to eq("<link rel=\"import\" href=\"/application.html\" />")
   end
 
 end

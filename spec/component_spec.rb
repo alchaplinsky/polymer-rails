@@ -3,29 +3,12 @@ require 'nokogiri'
 require 'polymer-rails/component'
 
 describe Polymer::Rails::Component do
-  let(:data){ '
-      <link rel="stylesheet" href="1.css">
+  let(:data){ '<link rel="stylesheet" href="1.css">
       <script type="text/javascript" src="1.js"></script>
       <script type="text/javascript" src="2.js"></script>
       <link rel="import" href="1.html">
       <link rel="import" href="2.html">'
   }
-
-  context '#create_node' do
-    subject { described_class.new(data).create_node('script', 'console.log("text");') }
-
-    it 'creates xml node' do
-      expect(subject).to be_kind_of(Nokogiri::XML::Node)
-    end
-
-    it 'creates script node' do
-      expect(subject.name).to eq('script')
-    end
-
-    it 'should add content to it' do
-      expect(subject.children).not_to be_empty
-    end
-  end
 
   context '#replace_node' do
     subject do
