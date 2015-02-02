@@ -8,7 +8,9 @@ module Polymer
       end
 
       initializer :precompile_polymer do |app|
-        app.config.assets.precompile += %w( polymer/polymer.js )
+        if app.config.respond_to? (:assets)
+          app.config.assets.precompile += %w( polymer/polymer.js )
+        end
       end
 
       initializer :add_preprocessors do |app|
