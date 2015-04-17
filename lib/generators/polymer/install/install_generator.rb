@@ -12,7 +12,7 @@ module Polymer
       def inject_js
         insert_into_file "app/assets/javascripts/application.js", before: "//= require jquery\n" do
           out = ""
-          out << "//= require polymer/webcomponents"
+          out << "//= require webcomponentsjs/webcomponents-lite"
           out << "\n"
         end
       end

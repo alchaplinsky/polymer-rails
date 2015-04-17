@@ -15,6 +15,16 @@ This assets will be automatically compiled and required into component html file
 * Note that if you're using sass or coffe precompilation, assets are required to use '.css.sass' and '.js.coffee' extensions.*
 
 
+## Versions
+Consider the 0.8 release to be our proposed API for 1.0. It is an “alpha” release — we fully expect some breaking changes as a result of the feedback we get.
+
+This release is intended for early adopters who want to test out the new APIs and provide feedback. This release is optimized for performance and size, and is not yet a feature-complete replacement for 0.5.
+
+0.8.x release is not compatible with the 0.5 APIs. For guidance on migrating an existing 0.5 element to the 0.8 APIs, see the [Migration guide](https://www.polymer-project.org/0.8/docs/migration.html).
+
+* `0.2.x` Releases include Polymer versions `0.5.x`
+* `0.3.x` Releases include Polymer versions `0.8.x`
+
 
 ## Installation
 
@@ -36,7 +46,7 @@ Or install it yourself as:
 
     $ rails g polymer:install
 
-- This generator adds `//= require polymer/webcomponents` into `application.js` manifest file  
+- This generator adds `//= require webcomponentsjs/webcomponents-lite` into `application.js` manifest file  
 - Creates `app/assets/components` and `application.html` manifest file where you can include all your components.
 - Creates `vendor/assets/components` directory for third-party web components.
 
