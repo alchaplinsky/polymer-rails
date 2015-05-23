@@ -1,13 +1,15 @@
 require "spec_helper"
 require 'nokogiri'
 require 'polymer-rails/component'
+require 'uri'
 
 describe Polymer::Rails::Component do
   let(:data){ '<link rel="stylesheet" href="1.css">
       <script type="text/javascript" src="1.js"></script>
       <script type="text/javascript" src="2.js"></script>
       <link rel="import" href="1.html">
-      <link rel="import" href="2.html">'
+      <link rel="import" href="2.html">
+      <core-icon relative="" id="icon" src="{{src}}" icon="{{icon}}"></core-icon>'
   }
 
   context '#replace_node' do

@@ -13,9 +13,7 @@ module Polymer
       end
 
       def stringify
-        xml_nodes.reduce(to_html) do |output, node|
-          output.gsub(node.to_html, node.to_xml(XML_OPTIONS)).encode(ENCODING)
-        end
+        to_html(@doc.css('body').children).lstrip
       end
 
       def replace_node(node, name, content)
@@ -42,8 +40,22 @@ module Polymer
         node
       end
 
-      def to_html
-        @doc.css("body").children.to_html(encoding: ENCODING).lstrip
+      def to_html(child_nodes)
+        child_nodes.map do |child_node|
+          # can't just use to_html as libxml messes with attribute value encodings
+          if child_node.text?
+            child_node.text
+          else
+            name = child_node.name
+            #attrs = child_node.attributes.map {|name,value| " #{name}=\"#{value}\""}.join
+            attrs = child_node.attributes.map {|name,attr| " #{name}=#{attr.value.encode(:xml => :attr)}"}.join
+            if child_node.children.empty? && child_node.description && child_node.description.save_end_tag?
+              "<#{name}#{attrs}>"
+            else
+              "<#{name}#{attrs}>#{to_html(child_node.children)}</#{child_node.name}>"
+            end
+          end
+        end.join
       end
 
       def xml_nodes
