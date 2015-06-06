@@ -1,5 +1,5 @@
 # Polymer-Rails
-Want to get started with  [web components](http://www.w3.org/wiki/WebComponents/)? Want to bring them into your Rails app? Easily build your own and use web components that are built by community in your Ruby on Rails Application. Poymer-rails helps you to do this:
+Want to get started with  [web components](http://www.w3.org/wiki/WebComponents/)? Want to bring them into your Rails app? Easily build your own and use web components that are built by community in your Ruby on Rails Application. Polymer-rails helps you to do this:
 
 1. Adds [polymer](http://polymer-project.org/) library to assets of your rails project.
 
@@ -16,15 +16,12 @@ This assets will be automatically compiled and required into component html file
 
 
 ## Versions
-Consider the 0.8 release to be our proposed API for 1.0. It is an “alpha” release — we fully expect some breaking changes as a result of the feedback we get.
+Polymer 1.0 is out! 
 
-This release is intended for early adopters who want to test out the new APIs and provide feedback. This release is optimized for performance and size, and is not yet a feature-complete replacement for 0.5.
+* Use `0.2.x` versions of `polymer-rails` to work with Polymer versions `0.5.x`
+* Use `1.0.x` versions of `polymer-rails` to work with Polymer versions `1.0.x`
 
-0.8.x release is not compatible with the 0.5 APIs. For guidance on migrating an existing 0.5 element to the 0.8 APIs, see the [Migration guide](https://www.polymer-project.org/0.8/docs/migration.html).
-
-* `0.2.x` Releases include Polymer versions `0.5.x`
-* `0.3.x` Releases include Polymer versions `0.8.x`
-
+1.0 release is not compatible with the 0.5 APIs. For guidance on migrating an existing 0.5 elements to the 1.0 APIs, see the [Migration guide](https://www.polymer-project.org/1.0/docs/migration.html).
 
 ## Installation
 
