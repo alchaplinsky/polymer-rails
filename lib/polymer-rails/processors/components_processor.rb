@@ -19,7 +19,7 @@ module Polymer
     private
 
       def require_imports
-        @component.imports.each do |import|
+        @component.html_imports.each do |import|
           @context.require_asset absolute_asset_path(import.attributes['href'].value)
           import.remove
         end

@@ -4,9 +4,21 @@ module Polymer
   module Rails
     class Component
 
+      # HTML Encoding
       ENCODING = 'UTF-8'
+
+      # Nodes that should be parsed as XML nodes
       XML_NODES = ['*[selected]', '*[checked]', '*[src]:not(script)']
+
+      # XML options for to_xml method
       XML_OPTIONS = { save_with: Nokogiri::XML::Node::SaveOptions::NO_EMPTY_TAGS }
+
+      # Selectors for component resources
+      SELECTORS = {
+        html:       "link[rel='import']:not([type='css'])",
+        stylesheet: "link[rel='stylesheet'], link[rel='import'][type='css']",
+        javascript: "script[src]"
+      }
 
       def initialize(data)
         @doc = ::Nokogiri::HTML5("<body>#{data}</body>")
@@ -23,15 +35,17 @@ module Polymer
       end
 
       def stylesheets
-        @doc.css("link[rel='stylesheet']").reject{|tag| is_external? tag.attributes['href'].value}
+        @doc.css(SELECTORS[:stylesheet]).reject{|tag| is_external? tag.attributes['href'].value}
       end
 
       def javascripts
-        @doc.css("script[src]").reject{|tag| is_external? tag.attributes['src'].value}
+        @doc.css(SELECTORS[:javascript]).reject do |tag|
+          is_external? tag.attributes['src'].value
+        end
       end
 
-      def imports
-        @doc.css("link[rel='import']")
+      def html_imports
+        @doc.css(SELECTORS[:html])
       end
 
     private

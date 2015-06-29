@@ -4,6 +4,7 @@ require 'polymer-rails/component'
 
 describe Polymer::Rails::Component do
   let(:data){ '<link rel="stylesheet" href="1.css">
+      <link rel="import" type="css" href="1.css">
       <script type="text/javascript" src="1.js"></script>
       <script type="text/javascript" src="2.js"></script>
       <link rel="import" href="1.html">
@@ -24,8 +25,8 @@ describe Polymer::Rails::Component do
     end
   end
 
-  context '#imports' do
-    subject{ described_class.new(data).imports }
+  context '#html_imports' do
+    subject{ described_class.new(data).html_imports }
 
     it 'returns array of nodes' do
       expect(subject.size).to eq 2
@@ -58,7 +59,7 @@ describe Polymer::Rails::Component do
     subject{ described_class.new(data).stylesheets }
 
     it 'returns array of nodes' do
-      expect(subject.size).to eq 1
+      expect(subject.size).to eq 2
       expect(subject[0]).to be_kind_of(Nokogiri::XML::Element)
     end
 
