@@ -1,13 +1,6 @@
-require 'polymer-rails/component'
-
 module Polymer
   module Rails
-    class ComponentsProcessor < Sprockets::Processor
-
-      def initialize(context, data)
-        @context = context
-        @component = Component.new(data)
-      end
+    module ComponentsProcessor
 
       def process
         inline_styles
@@ -61,7 +54,6 @@ module Polymer
       def find_asset(asset_path)
         ::Rails.application.assets.find_asset(asset_path)
       end
-
     end
   end
 end
