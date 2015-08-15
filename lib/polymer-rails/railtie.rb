@@ -20,16 +20,16 @@ module Polymer
       private
 
       def add_preprocessors(app)
-        app.assets.register_preprocessor 'text/html', Polymer::Rails::DirectiveProcessor
+        app.assets.register_preprocessor 'text/html', Polymer::Rails::Processors::Directive
         if Polymer::Rails::LEGACY_SPROCKETS
           app.assets.register_mime_type "text/html", '.html'
           app.assets.register_postprocessor 'text/html', :web do |context, data|
-            Polymer::Rails::ComponentsProcessor.new(context, data).process
+            Polymer::Rails::Processors::Component.new(context, data).process
           end
         else
           app.assets.register_mime_type 'text/html', extensions: ['.html']
           app.assets.register_bundle_processor 'text/html', ::Sprockets::Bundle
-          app.assets.register_postprocessor 'text/html', Polymer::Rails::ComponentsProcessor
+          app.assets.register_postprocessor 'text/html', Polymer::Rails::Processors::Component
         end
       end
     end
