@@ -1,10 +1,6 @@
-require 'polymer-rails/component'
-require 'polymer-rails/processors/components_processor'
-
 module Polymer
   module Rails
-    class ComponentsProcessorV3
-      include ::Polymer::Rails::ComponentsProcessor
+    class SprocketsProcessor
 
       def self.instance
         @instance ||= new
