@@ -1,8 +1,15 @@
 require "spec_helper"
-require 'nokogiri'
-require 'polymer-rails/component'
+require "polymer-rails/xml_adapters/base"
+require "polymer-rails/component"
 
 describe Polymer::Rails::Component do
+
+  if RUBY_PLATFORM =~ /java/
+    XML_ELEMENT = org.jsoup.nodes.Element
+  else
+    XML_ELEMENT = Nokogiri::XML::Element
+  end
+
   let(:data){ '<link rel="stylesheet" href="1.css">
       <link rel="import" type="css" href="1.css">
       <script type="text/javascript" src="1.js"></script>
@@ -30,7 +37,7 @@ describe Polymer::Rails::Component do
 
     it 'returns array of nodes' do
       expect(subject.size).to eq 2
-      expect(subject[0]).to be_kind_of(Nokogiri::XML::Element)
+      expect(subject[0]).to be_kind_of(XML_ELEMENT)
     end
 
     it 'returns nodes of html imports' do
@@ -45,7 +52,7 @@ describe Polymer::Rails::Component do
 
     it 'returns array of nodes' do
       expect(subject.size).to eq 2
-      expect(subject[0]).to be_kind_of(Nokogiri::XML::Element)
+      expect(subject[0]).to be_kind_of(XML_ELEMENT)
     end
 
     it 'returns nodes of html imports' do
@@ -60,7 +67,7 @@ describe Polymer::Rails::Component do
 
     it 'returns array of nodes' do
       expect(subject.size).to eq 2
-      expect(subject[0]).to be_kind_of(Nokogiri::XML::Element)
+      expect(subject[0]).to be_kind_of(XML_ELEMENT)
     end
 
     it 'returns nodes of html imports' do
@@ -73,7 +80,7 @@ describe Polymer::Rails::Component do
     subject{ described_class.new(data).stringify }
 
     it 'should return html string' do
-      expect(subject).to eq(data)
+      expect(subject.squish).to eq(data.squish)
     end
   end
 
