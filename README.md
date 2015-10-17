@@ -12,7 +12,7 @@ Want to get started with  [web components](http://www.w3.org/wiki/WebComponents/
 Polymer-rails works well with compiling assets, such as CoffeeScript and Sass.
 You can easily use external stylesheet or script tag references in your web component `<link rel="stylesheet" href="application.css">` for stylesheets and `<script src="application.js">` for javascripts.
 This assets will be automatically compiled and required into component html file.
-* Note that if you're using sass or coffe precompilation, assets are required to use '.css.sass' and '.js.coffee' extensions.*
+* Note that if you're using sass or coffee precompilation, assets are required to use '.css.sass' and '.js.coffee' extensions.*
 
 
 ## Versions
