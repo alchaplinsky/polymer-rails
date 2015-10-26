@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
     spec.add_development_dependency 'ruby-maven', '~> 3.1.1.0'
   else
     spec.add_runtime_dependency "nokogiri", "~> 1.6"
-    spec.add_runtime_dependency "nokogumbo", "~> 1.1"
+    spec.add_runtime_dependency "nokogumbo", "~> 1.4.2"
   end
 
   spec.add_runtime_dependency "rails",    ">= 3.1.0"
