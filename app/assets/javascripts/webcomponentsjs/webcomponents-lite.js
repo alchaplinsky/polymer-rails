@@ -7,13 +7,14 @@
  * Code distributed by Google as part of the polymer project is also
  * subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
  */
-// @version 0.7.12
-window.WebComponents = window.WebComponents || {};
-
-(function(scope) {
-  var flags = scope.flags || {};
+// @version 0.7.15
+(function() {
+  window.WebComponents = window.WebComponents || {
+    flags: {}
+  };
   var file = "webcomponents-lite.js";
   var script = document.querySelector('script[src*="' + file + '"]');
+  var flags = {};
   if (!flags.noOpts) {
     location.search.slice(1).split("&").forEach(function(option) {
       var parts = option.split("=");
@@ -29,7 +30,7 @@ window.WebComponents = window.WebComponents || {};
         }
       }
     }
-    if (flags.log) {
+    if (flags.log && flags.log.split) {
       var parts = flags.log.split(",");
       flags.log = {};
       parts.forEach(function(f) {
@@ -39,20 +40,14 @@ window.WebComponents = window.WebComponents || {};
       flags.log = {};
     }
   }
-  flags.shadow = flags.shadow || flags.shadowdom || flags.polyfill;
-  if (flags.shadow === "native") {
-    flags.shadow = false;
-  } else {
-    flags.shadow = flags.shadow || !HTMLElement.prototype.createShadowRoot;
-  }
   if (flags.register) {
     window.CustomElements = window.CustomElements || {
       flags: {}
     };
     window.CustomElements.flags.register = flags.register;
   }
-  scope.flags = flags;
-})(window.WebComponents);
+  WebComponents.flags = flags;
+})();
 
 (function(scope) {
   "use strict";
@@ -574,7 +569,7 @@ window.WebComponents = window.WebComponents || {};
     };
   }
   scope.URL = jURL;
-})(this);
+})(self);
 
 if (typeof WeakMap === "undefined") {
   (function() {
@@ -613,6 +608,9 @@ if (typeof WeakMap === "undefined") {
 }
 
 (function(global) {
+  if (global.JsMutationObserver) {
+    return;
+  }
   var registrationsTable = new WeakMap();
   var setImmediate;
   if (/Trident|Edge/.test(navigator.userAgent)) {
@@ -908,8 +906,11 @@ if (typeof WeakMap === "undefined") {
     }
   };
   global.JsMutationObserver = JsMutationObserver;
-  if (!global.MutationObserver) global.MutationObserver = JsMutationObserver;
-})(window);
+  if (!global.MutationObserver) {
+    global.MutationObserver = JsMutationObserver;
+    JsMutationObserver._isPolyfilled = true;
+  }
+})(self);
 
 window.HTMLImports = window.HTMLImports || {
   flags: {}
@@ -1629,7 +1630,7 @@ window.HTMLImports.addModule(function(scope) {
   if (scope.useNative) {
     return;
   }
-  if (isIE && typeof window.CustomEvent !== "function") {
+  if (!window.CustomEvent || isIE && typeof window.CustomEvent !== "function") {
     window.CustomEvent = function(inType, params) {
       params = params || {};
       var e = document.createEvent("CustomEvent");
@@ -1756,8 +1757,9 @@ window.CustomElements.addModule(function(scope) {
       }
     });
   }
-  var hasPolyfillMutations = !window.MutationObserver || window.MutationObserver === window.JsMutationObserver;
-  scope.hasPolyfillMutations = hasPolyfillMutations;
+  var hasThrottledAttached = window.MutationObserver._isPolyfilled && flags["throttle-attached"];
+  scope.hasPolyfillMutations = hasThrottledAttached;
+  scope.hasThrottledAttached = hasThrottledAttached;
   var isPendingMutations = false;
   var pendingMutations = [];
   function deferMutation(fn) {
@@ -1776,7 +1778,7 @@ window.CustomElements.addModule(function(scope) {
     pendingMutations = [];
   }
   function attached(element) {
-    if (hasPolyfillMutations) {
+    if (hasThrottledAttached) {
       deferMutation(function() {
         _attached(element);
       });
@@ -1799,7 +1801,7 @@ window.CustomElements.addModule(function(scope) {
     });
   }
   function detached(element) {
-    if (hasPolyfillMutations) {
+    if (hasThrottledAttached) {
       deferMutation(function() {
         _detached(element);
       });
@@ -2260,7 +2262,7 @@ window.CustomElements.addModule(function(scope) {
       });
     });
   }
-  if (isIE && typeof window.CustomEvent !== "function") {
+  if (!window.CustomEvent || isIE && typeof window.CustomEvent !== "function") {
     window.CustomEvent = function(inType, params) {
       params = params || {};
       var e = document.createEvent("CustomEvent");
@@ -2367,6 +2369,37 @@ if (typeof HTMLTemplateElement === "undefined") {
     }
   })();
 }
+
+(function(scope) {
+  "use strict";
+  if (!window.performance) {
+    var start = Date.now();
+    window.performance = {
+      now: function() {
+        return Date.now() - start;
+      }
+    };
+  }
+  if (!window.requestAnimationFrame) {
+    window.requestAnimationFrame = function() {
+      var nativeRaf = window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame;
+      return nativeRaf ? function(callback) {
+        return nativeRaf(function() {
+          callback(performance.now());
+        });
+      } : function(callback) {
+        return window.setTimeout(callback, 1e3 / 60);
+      };
+    }();
+  }
+  if (!window.cancelAnimationFrame) {
+    window.cancelAnimationFrame = function() {
+      return window.webkitCancelAnimationFrame || window.mozCancelAnimationFrame || function(id) {
+        clearTimeout(id);
+      };
+    }();
+  }
+})(window.WebComponents);
 
 (function(scope) {
   var style = document.createElement("style");
