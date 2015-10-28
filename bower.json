@@ -1,0 +1,7 @@
+{
+  "name": "polymer-rails",
+  "private": true,
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.0.0"
+  }
+}
