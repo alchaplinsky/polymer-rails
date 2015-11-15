@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = "polymer-rails"
   spec.version       = Polymer::Rails::VERSION
   spec.authors       = ["Alex Chaplinsky"]
-  spec.email         = ["alchapone@yandex.ru"]
+  spec.email         = ["alchaplinsky@gmail.com"]
   spec.summary       = %q{Use of web components with polymer with rails}
   spec.description   = %q{Use of web components and polymer-project in Ruby on Rails projects}
   spec.homepage      = "http://github.com/alchapone/polymer-rails"
