@@ -17,9 +17,9 @@ Gem::Specification.new do |spec|
 
   if RUBY_PLATFORM =~ /java/
     spec.platform = 'java'
-    spec.add_runtime_dependency 'jar-dependencies', "~> 0.1.1"
+    spec.add_runtime_dependency 'jar-dependencies', ">= 0.1.1"
     spec.requirements << "jar org.jsoup:jsoup, 1.8.3"
-    spec.add_development_dependency 'ruby-maven', '~> 3.1.1.0'
+    spec.add_development_dependency 'ruby-maven', '>= 3.1.1.0'
   else
     spec.add_runtime_dependency "nokogiri", "~> 1.6"
     # lock nokogumbo to 1.4.2, looks like nokogumbo 1.4.3 deletes template tags from custom components
