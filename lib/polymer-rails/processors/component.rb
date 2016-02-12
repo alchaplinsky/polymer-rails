@@ -1,9 +1,5 @@
 require 'polymer-rails/component'
-if Polymer::Rails::LEGACY_SPROCKETS
-  require 'polymer-rails/processors/sprockets_v2_processor'
-else
-   require "polymer-rails/processors/sprockets_v3_processor"
-end
+require "polymer-rails/processors/sprockets_processor"
 
 module Polymer
   module Rails

@@ -1,9 +1,3 @@
-module Polymer
-  module Rails
-    LEGACY_SPROCKETS = Gem::Version.new(Sprockets::VERSION) < Gem::Version.new('3.0.0')
-  end
-end
-
 require "sprockets"
 require "polymer-rails/version"
 require "polymer-rails/xml_adapters/base"
