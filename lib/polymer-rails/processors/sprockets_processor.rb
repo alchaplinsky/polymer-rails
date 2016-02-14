@@ -7,6 +7,7 @@ module Polymer
       end
 
       def self.call(input)
+        @@sprockets_env = input[:environment]
         instance.call(input)
       end
 
