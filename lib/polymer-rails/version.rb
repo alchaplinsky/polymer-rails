@@ -1,5 +1,5 @@
 module Polymer
   module Rails
-    VERSION = "1.2.4.1"
+    VERSION = "1.4.0"
   end
 end
