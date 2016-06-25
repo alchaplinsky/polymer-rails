@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
   else
     spec.add_runtime_dependency "nokogiri", "~> 1.6"
     # lock nokogumbo to 1.4.2, looks like nokogumbo 1.4.3 deletes template tags from custom components
-    spec.add_runtime_dependency "nokogumbo", "1.4.2"
+    spec.add_runtime_dependency "nokogumbo"
   end
 
   spec.add_runtime_dependency "rails",    ">= 3.1.0"

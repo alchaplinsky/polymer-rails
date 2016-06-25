@@ -6,7 +6,7 @@ module Polymer
     module XmlAdapters
       class Nokogiri < Base
         def parse_document data
-          ::Nokogiri::HTML data
+          ::Nokogiri::HTML5 data
         end
 
         def create_node doc, name, content
