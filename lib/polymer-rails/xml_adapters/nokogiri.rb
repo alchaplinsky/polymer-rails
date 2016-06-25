@@ -20,7 +20,7 @@ module Polymer
         end
 
         def stringify doc
-          doc.to_xhtml
+          doc.to_xhtml.gsub(/(&amp;)|(&lt;)|(&gt;)/, '&amp;' => '&', '&lt;' => '<', '&gt;' => '>')
         end
 
         def css_select doc, selector
