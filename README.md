@@ -27,11 +27,15 @@ Polymer 1.0 is out!
 
 Add this line to your application's Gemfile:
 
-    gem 'polymer-rails', github: 'lyonmarks/polymer-rails', branch: '2.0.x'
+    gem 'polymer-rails'
 
 And then execute:
 
     $ bundle
+
+Or install it yourself as:
+
+    $ gem install polymer-rails
 
 ## Usage
 
