@@ -3,6 +3,30 @@ class <%= component_name.gsub!(/[^0-9A-Za-z]/, '_').camelize %> extends Polymer.
 	
 	// Stamp template from this dom-module into element's shadow DOM:
 	static get is() { return '<%= component_name.gsub!(/[^0-9A-Za-z]/, '_').camelize.tableize.singularize.dasherize %>'; }
+
+	// Default constructor
+	constructor() {
+		super();
+		
+		// Set default value for properties
+		this.owner = "my property";
+		
+		console.log("'<%= component_name.gsub!(/[^0-9A-Za-z]/, '_').camelize.tableize.singularize.dasherize %>' was created!");
+	}
+	
+	// Define property/attribute API:
+	static get properties() {
+		return {
+			owner: {
+				type: String,
+				observer: 'ownerChanged'
+			}
+		};
+	}
+	
+	ownerChanged(own) {
+		this.textContent = 'Changed value is: ' + own;
+	}
 }
 
 // Register custom element class with browser

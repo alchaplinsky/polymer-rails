@@ -2,6 +2,10 @@
   <link rel="stylesheet" href="<%= component_name %>.css" />
   <template>
     <h2><%= file_name.capitalize.gsub('_', ' ') %></h2>
+	<h4>Dafault value is: {{owner}}</h4>
+	
+	<!-- any children are rendered here -->
+	<slot></slot>
   </template>
 
   <script src="<%= component_name %>.js"></script>
