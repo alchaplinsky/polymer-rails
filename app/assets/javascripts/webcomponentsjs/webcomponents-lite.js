@@ -188,4 +188,4 @@ b=window.HTMLImports;if(a&&a.polyfillWrapFlushCallback){var c,d=function(){if(c)
 var b=document.querySelector("head");b.insertBefore(a,b.firstChild)})()})();
 }).call(self)
 
-//# sourceMappingURL=webcomponents-lite.js.map
+// sourceMappingURL=webcomponents-lite.js.map

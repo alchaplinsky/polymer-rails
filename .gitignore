@@ -23,6 +23,3 @@ app/assets/javascripts/polymer/*.txt
 app/assets/javascripts/webcomponentsjs/*.json
 app/assets/javascripts/webcomponentsjs/*.log
 app/assets/javascripts/webcomponentsjs/*.md
-app/assets/javascripts/webcomponentsjs/*.js
-!app/assets/javascripts/webcomponentsjs/webcomponents.js
-!app/assets/javascripts/webcomponentsjs/webcomponents-lite.js

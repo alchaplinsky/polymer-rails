@@ -13,7 +13,7 @@ module Polymer
         template "component.css.erb", "app/assets/components/#{component_name}/#{component_name}.css"
 		
 		insert_into_file "app/assets/components/application.html.erb", after: "//= require shadycss/custom-style-interface" do
-			out = "\n\n"
+			out = "\n"
 			out << "//= require #{component_name}/#{component_name}"
 			out << "\n"
 		end
