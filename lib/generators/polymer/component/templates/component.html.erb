@@ -1,7 +1,6 @@
-<dom-module id="<%= component_name %>">
+<dom-module id="<%= component_name.gsub!(/[^0-9A-Za-z]/, '_').camelize.tableize.singularize.dasherize %>">
   <link rel="stylesheet" href="<%= component_name %>.css" />
   <template>
-
     <h2><%= file_name.capitalize.gsub('_', ' ') %></h2>
   </template>
 

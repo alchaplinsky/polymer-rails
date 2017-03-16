@@ -1,3 +1,9 @@
-Polymer({
-  is: "<%= component_name %>"
-});
+// Custom element that extends Polymer base class
+class <%= component_name.gsub!(/[^0-9A-Za-z]/, '_').camelize %> extends Polymer.Element {
+	
+	// Stamp template from this dom-module into element's shadow DOM:
+	static get is() { return '<%= component_name.gsub!(/[^0-9A-Za-z]/, '_').camelize.tableize.singularize.dasherize %>'; }
+}
+
+// Register custom element class with browser
+customElements.define(<%= component_name.gsub!(/[^0-9A-Za-z]/, '_').camelize %>.is, <%= component_name.gsub!(/[^0-9A-Za-z]/, '_').camelize %>);
