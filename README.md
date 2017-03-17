@@ -41,20 +41,11 @@ And then execute:
 - Creates `app/assets/components` and `application.html` manifest file where you can include all your components.
 - Creates `vendor/assets/components` directory for third-party web components.
 
-After running `rails g polymer:install`, add `<%= html_import_tag 'application'%>` line into your layout,
-to import web components manifest to your app.
-
 #### Creating a component
 
     $ rails g polymer:component <component-name>
 
 This generates new `<component-name>` component directory and `.html`, `.css`, `.js` files of the same name under `app/assets/components` folder.
-
-Add your component to `.html` manifest file after requiring polymer:
-
-    //
-    //= require polymer/polymer
-    //= require component-name/component-name
 
 And you can use your component in Rails application!
 
