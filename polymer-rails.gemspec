@@ -6,7 +6,7 @@ require 'polymer-rails/version'
 Gem::Specification.new do |spec|
   spec.name          = "polymer-rails"
   spec.version       = Polymer::Rails::VERSION
-  spec.authors       = ["Alex Chaplinsky"]
+  spec.authors       = ["Alex Chaplinsky", "Lyon Marks"]
   spec.email         = ["alchaplinsky@gmail.com", "lyonmarks@gmail.com"]
   spec.summary       = %q{Use of web components with polymer with rails}
   spec.description   = %q{Use of web components and polymer-project in Ruby on Rails projects}
