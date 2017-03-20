@@ -37,7 +37,7 @@ And then execute:
 
     $ rails g polymer:install
 
-- This generator adds `//= require webcomponentsjs/webcomponents-lite` into `application.js` manifest file  
+- This generator adds `//= require webcomponentsjs/webcomponents-loader` into `application.js` manifest file  
 - Creates `app/assets/components` and `application.html` manifest file where you can include all your components.
 - Creates `vendor/assets/components` directory for third-party web components.
 
