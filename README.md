@@ -20,6 +20,7 @@ Polymer 1.0 is out!
 
 * Use `0.2.x` versions of `polymer-rails` to work with Polymer versions `0.5.x`
 * Use `1.0.x` versions of `polymer-rails` to work with Polymer versions `1.0.x`
+* Use `2.0.x` versions of `polymer-rails` to work with Polymer versions `2.0.x`
 
 1.0 release is not compatible with the 0.5 APIs. For guidance on migrating an existing 0.5 elements to the 1.0 APIs, see the [Migration guide](https://www.polymer-project.org/1.0/docs/migration.html).
 
@@ -27,15 +28,11 @@ Polymer 1.0 is out!
 
 Add this line to your application's Gemfile:
 
-    gem 'polymer-rails'
+    gem 'polymer-rails', github: 'lyonmarks/polymer-rails', branch: '2.0.x'
 
 And then execute:
 
     $ bundle
-
-Or install it yourself as:
-
-    $ gem install polymer-rails
 
 ## Usage
 
