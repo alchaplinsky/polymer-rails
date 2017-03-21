@@ -16,10 +16,8 @@ This assets will be automatically compiled and required into component html file
 
 
 ## Versions
-Polymer 1.0 is out! 
 
-* Use `0.2.x` versions of `polymer-rails` to work with Polymer versions `0.5.x`
-* Use `1.0.x` versions of `polymer-rails` to work with Polymer versions `1.0.x`
+* This version is only for Polymer `2.0.x`
 
 1.0 release is not compatible with the 0.5 APIs. For guidance on migrating an existing 0.5 elements to the 1.0 APIs, see the [Migration guide](https://www.polymer-project.org/1.0/docs/migration.html).
 
@@ -27,15 +25,11 @@ Polymer 1.0 is out!
 
 Add this line to your application's Gemfile:
 
-    gem 'polymer-rails'
+    gem 'polymer-rails', github: 'lyonmarks/polymer-rails'
 
 And then execute:
 
     $ bundle
-
-Or install it yourself as:
-
-    $ gem install polymer-rails
 
 ## Usage
 
@@ -43,24 +37,15 @@ Or install it yourself as:
 
     $ rails g polymer:install
 
-- This generator adds `//= require webcomponentsjs/webcomponents-lite` into `application.js` manifest file  
+- This generator adds `//= require webcomponentsjs/webcomponents-loader` into `application.js` manifest file  
 - Creates `app/assets/components` and `application.html` manifest file where you can include all your components.
 - Creates `vendor/assets/components` directory for third-party web components.
-
-After running `rails g polymer:install`, add `<%= html_import_tag 'application'%>` line into your layout,
-to import web components manifest to your app.
 
 #### Creating a component
 
     $ rails g polymer:component <component-name>
 
 This generates new `<component-name>` component directory and `.html`, `.css`, `.js` files of the same name under `app/assets/components` folder.
-
-Add your component to `.html` manifest file after requiring polymer:
-
-    //
-    //= require polymer/polymer
-    //= require component-name/component-name
 
 And you can use your component in Rails application!
 
