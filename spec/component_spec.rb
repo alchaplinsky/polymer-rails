@@ -18,6 +18,10 @@ describe Polymer::Rails::Component do
       <link rel="import" href="2.html">'
   }
 
+  let(:img_tag){'<img src="[[link1]]" attr="[[attr1]]">
+      <img src="{{link2}}" attr="{{attr2}}">'
+  }
+
   context '#replace_node' do
     subject do
       doc = described_class.new(data)
@@ -77,10 +81,20 @@ describe Polymer::Rails::Component do
   end
 
   context '#stringify' do
-    subject{ described_class.new(data).stringify }
+    context 'regular html' do
+      subject{ described_class.new(data).stringify }
 
-    it 'should return html string' do
-      expect(subject.squish).to eq(data.squish)
+      it 'should return html string' do
+        expect(subject.squish).to eq(data.squish)
+      end
+    end
+
+    context 'img tag with one-way and two-way binding' do
+      subject{ described_class.new(img_tag).stringify }
+
+      it 'should return html string' do
+        expect(subject.squish).to eq(img_tag.squish)
+      end
     end
   end
 

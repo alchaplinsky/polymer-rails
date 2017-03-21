@@ -28,7 +28,11 @@ module Polymer
 
         def stringify doc
           xml_nodes(doc).reduce(to_html(doc)) do |output, node|
-            output.gsub(node.to_html, node.to_xml(XML_OPTIONS)).encode(ENCODING)
+            pattern = node.to_html
+            replacement = node.to_xml(XML_OPTIONS)
+            replacement.gsub!( /src="%5B%5B(.+?)%5D%5D"/i, 'src="[[\1]]"' )
+            replacement.gsub!( /src="%7B%7B(.+?)%7D%7D"/i, 'src="{{\1}}"' )
+            output.gsub(pattern, replacement).encode(ENCODING)
           end
         end
 
