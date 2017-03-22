@@ -19,13 +19,13 @@ This assets will be automatically compiled and required into component html file
 
 * This version is only for Polymer `2.0.x`
 
-1.0 release is not compatible with the 0.5 APIs. For guidance on migrating an existing 0.5 elements to the 1.0 APIs, see the [Migration guide](https://www.polymer-project.org/1.0/docs/migration.html).
+Version 2.0.x of Polymer is different in many respects and it is likely that it will not run smoothly with gem 'polymer-elements-rails'. Try using the Polymer elements separately in your "bower.json" file.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'polymer-rails', github: 'lyonmarks/polymer-rails'
+    gem 'polymer-rails', github: 'lyonmarks/polymer-rails', branch: '2.0.x'
 
 And then execute:
 
