@@ -7,12 +7,18 @@ module Polymer
 
       def create_manifest
         template "application.html.erb", "app/assets/components/application.html.erb"
+		
+		insert_into_file "app/views/layouts/application.html.erb", after: "<%= csrf_meta_tags %>\n" do
+			out = "\n"
+			out << "		<%= html_import_tag 'application' %>"
+			out << "\n"
+		end
       end
 
       def inject_js
         insert_into_file "app/assets/javascripts/application.js", before: "//= require jquery\n" do
           out = ""
-          out << "//= require webcomponentsjs/webcomponents-lite"
+          out << "//= require webcomponentsjs/webcomponents-loader"
           out << "\n"
         end
       end

@@ -11,6 +11,12 @@ module Polymer
         template "component.html.erb", "app/assets/components/#{component_name}/#{component_name}.html"
         template "component.js.erb", "app/assets/components/#{component_name}/#{component_name}.js"
         template "component.css.erb", "app/assets/components/#{component_name}/#{component_name}.css"
+		
+		insert_into_file "app/assets/components/application.html.erb", after: "//= require shadycss/custom-style-interface" do
+			out = "\n"
+			out << "//= require #{component_name}/#{component_name}"
+			out << "\n"
+		end
       end
 
       private
