@@ -1,3 +1,5 @@
-Polymer({
-  is: "<%= component_name %>"
-});
+class <%= class_name %> extends Polymer.Element {
+  static get is() { return '<%= component_name %>'; }
+}
+
+window.customElements.define(<%= class_name %>.is, <%= class_name %>)
