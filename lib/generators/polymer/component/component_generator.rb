@@ -20,7 +20,7 @@ module Polymer
       end
       
       def component_base_name
-        component_name.split['/'][-1]
+        component_name.split('/')[-1]
       end
     end
   end
