@@ -18,8 +18,8 @@ describe Polymer::Rails::Component do
       <link rel="import" href="2.html">'
   }
 
-  let(:img_tag){'<img src="[[link1]]" attr="[[attr1]]">
-      <img src="{{link2}}" attr="{{attr2}}">'
+  let(:img_tag){'<img src="[[link1]]" attr="[[attr1]]"></img>
+      <img src="{{link2}}" attr="{{attr2}}"></img>'
   }
 
   context '#replace_node' do

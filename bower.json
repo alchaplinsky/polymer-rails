@@ -2,6 +2,6 @@
   "name": "polymer-rails",
   "private": true,
   "dependencies": {
-    "polymer": "Polymer/polymer#1.3.0"
+    "polymer": "Polymer/polymer#2.0.1"
   }
 }
