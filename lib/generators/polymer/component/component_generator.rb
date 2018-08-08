@@ -20,6 +20,7 @@ module Polymer
       end
 
       def class_name
+        name.gsub!('-','_')
         name.split('_').map(&:capitalize).join('')
       end
       
