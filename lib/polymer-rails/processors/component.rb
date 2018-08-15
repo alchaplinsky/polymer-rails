@@ -49,6 +49,7 @@ module Polymer
           search_file = file.sub(/^(\.\.\/)+/, '/').sub(/^\/*/, '')
           @@sprockets_env.paths.each do |path|
             file_list = Dir.glob( "#{File.absolute_path search_file, path }*")
+            file_list.delete_if { |path| path =~ /\.map$/ }
             return file_list.first unless file_list.blank?
           end
           components = Dir.glob("#{File.absolute_path file, File.dirname(@context.pathname)}*")
