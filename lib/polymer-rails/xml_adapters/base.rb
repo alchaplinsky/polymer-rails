@@ -7,7 +7,7 @@ module Polymer
         ENCODING = 'UTF-8'
 
         def self.factory
-          klass = "#{parent}::#{RUBY_PLATFORM =~ /java/ ? 'Jsoup' : 'Nokogiri'}"
+          klass = "#{module_parent}::#{RUBY_PLATFORM =~ /java/ ? 'Jsoup' : 'Nokogiri'}"
           klass.constantize.new
         end
 
